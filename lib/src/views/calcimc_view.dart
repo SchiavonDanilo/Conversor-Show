@@ -9,6 +9,10 @@ class CalcIMC extends StatefulWidget {
 }
 
 class _CalcIMCState extends State<CalcIMC> {
+ double peso;
+ double altura;
+double resultado;
+var resul = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +45,14 @@ class _CalcIMCState extends State<CalcIMC> {
                         child: TextField(
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(labelText: 'Peso'),
+                          onChanged: (value){
+                           setState(() {
+                           
+                           peso = double.parse(value);
+                           });
+
+                          },
+
                         )),
                     // Container de espaçamento:
                     EspacamentoW(w: 10),
@@ -50,12 +62,46 @@ class _CalcIMCState extends State<CalcIMC> {
                       child: TextField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(labelText: 'Altura'),
+                        onChanged: (value){
+                           setState(() {
+                           
+                           altura = double.parse(value);
+                           });
+
+                          },
                       ),
                     ),
                   ],
                 ),
+                Container(
+                width: double.infinity,
+                  child: ElevatedButton(onPressed: () {
+                    resultado = peso / altura;
+                    if(resultado < 18.5){
+                      resul.text = "Abaixo do peso";
+                    }else if(resultado >= 18.5 && resultado < 24.9){
+                       resul.text = "Peso normal";
+                    }
+                    else if(resultado >= 25 && resultado < 29.9){
+                       resul.text = "Sobrepeso";
+                    }else if(resultado >= 30 && resultado < 34.9){
+                       resul.text = "Obesidade 1";
+                    }
+                    else if(resultado >= 35 && resultado < 39.9){
+                       resul.text = "Obesidade 2";
+                    }
+                     else{
+                       resul.text = "Obesidade 3";
+                     }
+                  }, child: Text("CALCULAR")),
+                ),
+
+
+
+
                 TextField(
                   enabled: false,
+                  controller: resul,
                   decoration: InputDecoration(
                       alignLabelWithHint: true,
                       labelStyle: TextStyle(fontWeight: FontWeight.bold),
