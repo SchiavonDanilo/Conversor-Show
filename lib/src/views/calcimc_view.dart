@@ -11,8 +11,8 @@ class CalcIMC extends StatefulWidget {
 class _CalcIMCState extends State<CalcIMC> {
  double peso;
  double altura;
-double resultado;
-var resul = TextEditingController();
+  double resultado;
+var resposta = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,22 +76,22 @@ var resul = TextEditingController();
                 Container(
                 width: double.infinity,
                   child: ElevatedButton(onPressed: () {
-                    resultado = peso / altura;
+                    resultado = peso / (altura * altura);
                     if(resultado < 18.5){
-                      resul.text = "Abaixo do peso";
+                      resposta.text = "Abaixo do peso";
                     }else if(resultado >= 18.5 && resultado < 24.9){
-                       resul.text = "Peso normal";
+                       resposta.text = "Peso normal";
                     }
                     else if(resultado >= 25 && resultado < 29.9){
-                       resul.text = "Sobrepeso";
+                       resposta.text = "Sobrepeso";
                     }else if(resultado >= 30 && resultado < 34.9){
-                       resul.text = "Obesidade 1";
+                       resposta.text = "Obesidade 1";
                     }
                     else if(resultado >= 35 && resultado < 39.9){
-                       resul.text = "Obesidade 2";
+                       resposta.text = "Obesidade 2";
                     }
                      else{
-                       resul.text = "Obesidade 3";
+                       resposta.text = "Obesidade 3";
                      }
                   }, child: Text("CALCULAR")),
                 ),
@@ -101,7 +101,7 @@ var resul = TextEditingController();
 
                 TextField(
                   enabled: false,
-                  controller: resul,
+                  controller: resposta,
                   decoration: InputDecoration(
                       alignLabelWithHint: true,
                       labelStyle: TextStyle(fontWeight: FontWeight.bold),
